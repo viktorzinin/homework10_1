@@ -9,7 +9,7 @@ def mask_account_card(number: str) -> str:
     """
     if len(number.split()[-1]) == 16:
         new_number = get_mask_card(number.split()[-1])
-        result = f"{number[:-16]}{new_number}"
+        result = f"{number[:-15]}{new_number}"
     elif len(number.split()[-1]) == 20:
         new_number = get_mask_account(number.split()[-1])
         result = f"{number[:-20]}{new_number}"
