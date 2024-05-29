@@ -13,6 +13,8 @@ def mask_account_card(number: str) -> str:
     elif len(number.split()[-1]) == 20:
         new_number = get_mask_account(number.split()[-1])
         result = f"{number[:-20]}{new_number}"
+    else:
+        raise ValueError("Неверный ввод данных")
     return result
 
 
