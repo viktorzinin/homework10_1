@@ -1,4 +1,3 @@
-import pytest
 from src.processing import get_sorted, get_date_sorted
 
 

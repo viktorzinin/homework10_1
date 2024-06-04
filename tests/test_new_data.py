@@ -19,5 +19,5 @@ def test_get_new_data(old_data):
         ("2018-06-30T02:08:58.4255722", "30.06.2018"),
     ],
 )
-def test_get_new_data(old_data, result):
+def test_get_new_data_1(old_data, result):
     assert get_new_data(old_data) == result
