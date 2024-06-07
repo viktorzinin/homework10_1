@@ -1,4 +1,4 @@
-from src.processing import get_sorted, get_date_sorted
+from src.processing import get_date_sorted, get_sorted
 
 
 def test_get_sort_dict(list_dict):
