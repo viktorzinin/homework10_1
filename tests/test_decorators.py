@@ -33,7 +33,7 @@ def test_log_console(capsys):
 
 
 # Тест записи в файл, если произошла ошибка.
-def test_log_file_raise():
+def test_log_file_raise() -> None:
     @log(filename="mylog.txt")
     def example_function(x, y):
         raise TypeError("Что-то пошло не так")
@@ -49,6 +49,7 @@ def test_log_file_raise():
 
 
 # Тест вывода в консоль, если произошла ошибка.
+
 
 def test_log_console_raise(capsys):
     @log()
