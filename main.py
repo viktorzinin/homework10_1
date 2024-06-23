@@ -3,7 +3,6 @@ import os.path
 from src.widget import get_new_data, mask_account_card
 from src.processing import get_sorted, get_date_sorted
 from src.generators import filter_by_currency, transaction_descriptions, card_number_generator
-from src.decorators import log
 from src.utils import transaction_amount
 from src.external_api import currency_conversion
 
