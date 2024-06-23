@@ -7,7 +7,7 @@ logging.basicConfig(
     level=logging.INFO,
 )
 
-logger = logging.getLogger()
+logger = logging.getLogger('macks')
 
 
 def get_mask_card(number: str) -> str:
