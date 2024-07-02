@@ -5,7 +5,12 @@ from src.processing import get_sorted, get_date_sorted
 from src.generators import filter_by_currency, transaction_descriptions, card_number_generator
 from src.utils import transaction_amount
 from src.external_api import currency_conversion
+import pandas as pd
 
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+path_to_csv = os.path.join(current_dir, "data", "transactions.csv")
+path_to_xlsx = os.path.join(current_dir, "data", "transactions_excel.xlsx")
 
 print(mask_account_card("Visa Platinum 8990922113665229"))
 
@@ -138,3 +143,24 @@ transactions1 = transaction_amount(file_path)
 for transaction in transactions1:
     rub_amount = currency_conversion(transaction)
     print(f'Transaction amount in RUB: {rub_amount}')
+
+
+def get_transaction_csv_data(path_to_csv):
+    """Функция принимает путь до файла CSV и возвращает данные транзакций"""
+    with open(path_to_csv, "r") as file:
+        data = pd.read_csv(file)
+        return data
+
+
+def get_transaction_xlsx_data(path_to_xlsx):
+    """Функция принимает путь до файла XLSX и возвращает данные транзакций"""
+    with open(path_to_xlsx, "rb") as file:
+        data = pd.read_excel(file)
+        return data
+
+
+if __name__ == "__main__":
+    data = get_transaction_csv_data(path_to_csv)
+    print(data.head())
+    data = get_transaction_xlsx_data(path_to_xlsx)
+    print(data.head())
