@@ -9,8 +9,8 @@ import pandas as pd
 
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-path_to_csv = os.path.join(current_dir, "data", "transactions.csv")
-path_to_xlsx = os.path.join(current_dir, "data", "transactions_excel.xlsx")
+path_to_csv = os.path.abspath("../ online_task_1/data/transactions.csv")
+path_to_xlsx = os.path.abspath("../ online_task_1/data/transactions_excel.xlsx")
 
 print(mask_account_card("Visa Platinum 8990922113665229"))
 
@@ -104,13 +104,13 @@ for card_number in card_number_generator(2, 7):
 
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-file_path = os.path.join(current_dir, "data", "operations.json")
+file_path = os.path.join(current_dir, "../data", "operations.json")
 transactions1 = transaction_amount(file_path)
 
 
 for transaction in transactions1:
     rub_amount = currency_conversion(transaction)
-    print(f'Transaction amount in RUB: {rub_amount}')
+    print(f"Transaction amount in RUB: {rub_amount}")
 
 
 def get_transaction_csv_data(path_to_csv):
