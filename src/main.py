@@ -1,17 +1,14 @@
 import os
 import time
 
-from src.processing import get_sorted, get_date_sorted, filter_dicts_by_string
 from src.generators import filter_by_currency
+from src.processing import get_sorted, get_date_sorted, filter_dicts_by_string
 from src.utils import get_transaction_json_data, get_transaction_csv_data, get_transaction_xlsx_data
 from src.widget import get_new_data, mask_account_card
 
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
-path_to_json = os.path.abspath("../data/operations.json")
-path_to_csv = os.path.abspath("../ online_task_1/data/transactions.csv")
-path_to_xlsx = os.path.abspath("../ online_task_1/data/transactions_excel.xlsx")
 
 # print(mask_account_card("Visa Platinum 8990922113665229"))
 #
@@ -141,6 +138,7 @@ def main():
             return list_of_commands
 
         list_of_commands = status_command()
+
     while len(list_of_commands) < 2:
 
         def operation_status():
@@ -244,7 +242,9 @@ def main():
         return data
 
     transactions_list = get_transactions_info()
+    # информация о параметре статуса операции
     transactions_list = get_sorted(transactions_list, state=list_of_commands[1])
+    # информацию о наличии параметра сортировки по дате
     if list_of_commands[2] == "да":
         transactions_list = get_date_sorted(transactions_list, reverse=list_of_commands[3])
     if list_of_commands[4] == "да":

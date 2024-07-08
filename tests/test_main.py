@@ -19,7 +19,8 @@ class TestGetTransactionsCSV(unittest.TestCase):
             result,
             [
                 {
-                    "id;state;date;amount;currency_name;currency_code;from;to;description": "4699552;EXECUTED;2022-03-23T08:29:37Z;23423;Peso;PHP;Discover "
+                    "id;state;date;amount;currency_name;currency_code;from;to;description":
+                        "4699552;EXECUTED;2022-03-23T08:29:37Z;23423;Peso;PHP;Discover "
                     "7269000803370165;American "
                     "Express "
                     "1963030970727681;Перевод "

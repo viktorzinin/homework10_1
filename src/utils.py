@@ -1,17 +1,15 @@
 import json
-import logging
 import pandas as pd
 import os
 from dotenv import load_dotenv
 from src.external_api import currency_conversion
+import io
+import csv
+from src.logger import setup_logger
 
-logging.basicConfig(
-    filename="logs/application.log",
-    filemode="w",
-    format="%(asctime)s - %(name)s - %(levelname)s: %(message)s",
-    level=logging.INFO,
-)
-logger = logging.getLogger("utils")
+current_dir = os.path.dirname(os.path.abspath(__file__))
+file_path_logs = os.path.join(current_dir, "../logs", "utils.log")
+logger = setup_logger("utils", file_path_logs)
 
 
 load_dotenv()
@@ -27,9 +25,9 @@ def get_transaction_json_data(path_to_json):
     logger.info("Запущена функция get_transaction_info")
     try:
         logger.info(f"Открытие JSON файла с указанным путём: {path_to_json}")
-        with open(path_to_json) as f:
+        with io.open(path_to_json, encoding="utf-8") as file:
             try:
-                data = json.load(f)
+                data = json.load(file)
                 logger.info("Получение данных из JSON файла")
                 return data
             except json.JSONDecodeError as ex:
@@ -42,18 +40,30 @@ def get_transaction_json_data(path_to_json):
 
 def get_transaction_csv_data(path_to_csv):
     """Функция принимает путь до файла CSV и возвращает данные транзакций"""
-    with open(path_to_csv, "r", encoding="utf-8") as file:
-        data = pd.read_csv(file)
-        data_as_dict = data.to_dict(orient="records")
-        return data_as_dict
+    try:
+        with open(path_to_csv, "r", encoding="utf-8") as f:
+            logger.info(f"Открытие файла {f}")
+            data = csv.DictReader(f, delimiter=";")
+            list_of_rows = []
+            for row in data:
+                list_of_rows.append(row)
+            logger.info(f"Получение данных из файла {f}")
+            return list_of_rows
+    except FileNotFoundError as ex:
+        logger.error(f"Ошибка, файл не найден: {ex}")
+        return []
 
 
 def get_transaction_xlsx_data(path_to_xlsx):
     """Функция принимает путь до файла XLSX и возвращает данные транзакций"""
-    with open(path_to_xlsx, "rb") as file:
-        data = pd.read_excel(file)
-        data_as_dict = data.to_dict(orient="records")
-        return data_as_dict
+    try:
+        with open(path_to_xlsx, "rb") as f:
+            data = pd.read_excel(f)
+            logger.info(f"Получение данных из файла {f}")
+            return data.to_dict(orient="records")
+    except FileNotFoundError as ex:
+        logger.error(f"Ошибка, файл не найден: {ex}")
+        return []
 
 
 def amount_of_transaction(transaction_json):

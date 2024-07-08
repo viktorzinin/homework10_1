@@ -12,10 +12,20 @@ def get_sorted(list_dict: list, state: str = "EXECUTED") -> list:
     return filter_list
 
 
-def get_date_sorted(list_dict: list, direction: bool = True) -> list:
-    """Функция сортирует по дате"""
-    sorted_list = sorted(list_dict, key=lambda x: x["date"], reverse=direction)
-    return sorted_list
+# def get_date_sorted(list_dict: list, direction: bool = True) -> list:
+#     """Функция сортирует по дате"""
+#     sorted_list = sorted(list_dict, key=lambda x: x["date"], reverse=direction)
+#     return sorted_list
+
+
+def get_date_sorted(dicts: list, reverse: bool = True) -> list:
+    """Фунция принимает список словарей и возвращает отсортированный список словарей по дате"""
+    not_empty_dicts = []
+    for dict in dicts:
+        if "date" in dict:
+            not_empty_dicts.append(dict)
+    sorted_dicts_list = sorted(not_empty_dicts, key=lambda key: key["date"], reverse=reverse)
+    return sorted_dicts_list
 
 
 def filter_dicts_by_string(dicts_to_filter, string):
