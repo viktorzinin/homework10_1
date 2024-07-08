@@ -9,7 +9,7 @@ logging.basicConfig(
     level=logging.INFO,
 )
 
-logger = logging.getLogger('utils')
+logger = logging.getLogger("utils")
 
 
 def transaction_amount(file_path: str) -> list:
