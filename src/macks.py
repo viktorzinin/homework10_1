@@ -1,13 +1,9 @@
-import logging
+from src.logger import setup_logger
+import os
 
-logging.basicConfig(
-    filename="logs/application.log",
-    filemode="w",
-    format="%(asctime)s - %(name)s - %(levelname)s: %(message)s",
-    level=logging.INFO,
-)
-
-logger = logging.getLogger("macks")
+current_dir = os.path.dirname(os.path.abspath(__file__))
+file_path_logs = os.path.join(current_dir, "../logs", "masks.log")
+logger = setup_logger("masks", file_path_logs)
 
 
 def get_mask_card(number: str) -> str:
@@ -16,7 +12,7 @@ def get_mask_card(number: str) -> str:
     :param number:str
     :return: маску карты
     """
-    logger.info(f"Принимаем номер карты: {number}")
+    logger.info("Принимаем номер карты:")
     number_cards = f"{number[:4]} {number[4:6]}** **** {number[12:]}"
     logger.info(f"Возвращаем маску карты: {number_cards}")
     return number_cards
@@ -28,7 +24,7 @@ def get_mask_account(number: str) -> str:
     :param number: str
     :return: маску счета
     """
-    logger.info(f"Принимаем номер счета: {number}")
+    logger.info("Принимаем номер счета: ")
     number_account = f"**{number[-4:]}"
     logger.info(f"Возвращаем маску счета: {number_account}")
     return number_account
